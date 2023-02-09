@@ -18,9 +18,25 @@
         background-color: black;
         overflow: hidden;
     }
+
+    p {
+        color: white;
+        font-family: sans-serif;
+        font-size: 14;
+        padding: 20px;
+    }
+
+    #canvas {
+        margin-left: 20px;
+    }
 </style>
 
 <body>
+    <p>
+        <span>
+            Score: <span id="scoreEl">0</span>
+        </span>
+    </p>
     <canvas id="canvas"></canvas>
 
     <script src="./index.js"></script>
