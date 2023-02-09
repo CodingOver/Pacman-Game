@@ -72,11 +72,13 @@ const keys = {
 let lastKey;
 
 const map = [
-    ['-', '-', '-', '-', '-', '-'],
-    ['-', ' ', ' ', ' ', ' ', '-'],
-    ['-', ' ', '-', '-', ' ', '-'],
-    ['-', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', '-', '-', '-', '-'],
+    ['-', '-', '-', '-', '-', '-', '-'],
+    ['-', ' ', ' ', ' ', ' ', ' ', '-'],
+    ['-', ' ', '-', ' ', '-', ' ', '-'],
+    ['-', ' ', ' ', ' ', ' ', ' ', '-'],
+    ['-', ' ', '-', ' ', '-', ' ', '-'],
+    ['-', ' ', ' ', ' ', ' ', ' ', '-'],
+    ['-', '-', '-', '-', '-', '-', '-'],
 ]
 
 map.forEach((row, i) => {
@@ -94,26 +96,121 @@ map.forEach((row, i) => {
     })
 })
 
+function circleCollidesWithRectangle({
+    circle,
+    rectangle
+}) {
+    return (
+        circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height &&
+        circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
+        circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
+        circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width
+    )
+}
+
 function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    if (keys.top.pressed && lastKey === 38) {
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                    circle: {
+                        ...player,
+                        velocity: {
+                            x: 0,
+                            y: -5
+                        }
+                    },
+                    rectangle: boundary
+                })
+            ) {
+                player.velocity.y = 0
+                break
+            } else {
+                player.velocity.y = -5
+            }
+        }
+    } else if (keys.right.pressed && lastKey === 39) {
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                    circle: {
+                        ...player,
+                        velocity: {
+                            x: 5,
+                            y: 0
+                        }
+                    },
+                    rectangle: boundary
+                })
+            ) {
+                player.velocity.x = 0
+                break
+            } else {
+                player.velocity.x = 5
+            }
+        }
+    } else if (keys.bottom.pressed && lastKey === 40) {
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                    circle: {
+                        ...player,
+                        velocity: {
+                            x: 0,
+                            y: 5
+                        }
+                    },
+                    rectangle: boundary
+                })
+            ) {
+                player.velocity.y = 0
+                break
+            } else {
+                player.velocity.y = 5
+            }
+        }
+    } else if (keys.left.pressed && lastKey === 37) {
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i]
+            if (
+                circleCollidesWithRectangle({
+                    circle: {
+                        ...player,
+                        velocity: {
+                            x: -5,
+                            y: 0
+                        }
+                    },
+                    rectangle: boundary
+                })
+            ) {
+                player.velocity.x = 0
+                break
+            } else {
+                player.velocity.x = -5
+            }
+        }
+    }
+
     boundaries.forEach((boundary) => {
         boundary.draw()
+        if (circleCollidesWithRectangle({
+            circle: player,
+            rectangle: boundary
+        })) {
+
+            player.velocity.x = 0
+            player.velocity.y = 0
+        }
     })
 
     player.update()
-    player.velocity.y = 0
-    player.velocity.x = 0
-
-    if (keys.top.pressed && lastKey === 38) {
-        player.velocity.y = -5
-    } else if (keys.right.pressed && lastKey === 39) {
-        player.velocity.x = 5
-    } else if (keys.bottom.pressed && lastKey === 40) {
-        player.velocity.y = 5
-    } else if (keys.left.pressed && lastKey === 37) {
-        player.velocity.x = -5
-    }
 }
 
 animate()
