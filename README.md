@@ -9,5 +9,7 @@
 
 > - [x] `implemented`- Generate map bounderies
 > - [x] `implemented`- Add Pacman with movement
+> - [x] `implemented`- Add collision detection
+
 
 **[Game Preview](https://codingover.github.io/Pacman-Game)**
