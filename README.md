@@ -7,7 +7,8 @@
 
 ## The Steps I Follow To Create This Game
 
-
+> - [x] `implemented`- Creating Map
+> - [x] `implemented`- Drawing Walls
 
 
 **[Game Preview](https://codingover.github.io/Pacman-Game)**
