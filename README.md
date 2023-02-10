@@ -7,12 +7,7 @@
 
 ## The Steps I Follow To Create This Game
 
-> - [x] `implemented`- Generate map bounderies
-> - [x] `implemented`- Add Pacman with movement
-> - [x] `implemented`- Add collision detection
-> - [x] `implemented`- Swap boundaries with images
-> - [x] `implemented`- Remove pellets on collision
-> - [x] `implemented`- Add Score
+
 
 
 **[Game Preview](https://codingover.github.io/Pacman-Game)**
