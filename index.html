@@ -7,39 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacman Game</title>
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        background-color: black;
-        overflow: hidden;
-    }
-
-    p {
-        color: white;
-        font-family: sans-serif;
-        font-size: 14;
-        padding: 20px;
-    }
-
-    #canvas {
-        margin-left: 20px;
-    }
-</style>
 
 <body>
-    <p>
-        <span>
-            Score: <span id="scoreEl">0</span>
-        </span>
-    </p>
     <canvas id="canvas"></canvas>
+    <div style="display: none;">
+        <img id="animations" src="./img/animations.gif" alt="">
+        <img id="ghosts" src="./img/ghost.png" alt="">
+    </div>
 
-    <script src="./index.js"></script>
+    <script src="./ghost.js"></script>
+    <script src="./pacman.js"></script>
+    <script src="./game.js"></script>
 </body>
 
 </html>
