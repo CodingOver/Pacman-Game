@@ -13,11 +13,17 @@ function createRect(x, y, width, height, color) {
 }
 
 let fps = 30
-let oneBlockSize = 20 // width of rectangle
+// let pacman;
+let oneBlockSize = 20 // Zoom in / Zoom out the game
 let wallColor = "#342DCA"
 let wallInnerColor = "black"
 let wallSpaceWidth = oneBlockSize / 1.6
 let wallOffset = (oneBlockSize - wallSpaceWidth) / 2
+
+const DIRECTION_RIGHT = 4
+const DIRECTION_UP = 3
+const DIRECTION_LEFT = 2
+const DIRECTION_BOTTOM = 1
 
 let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -45,19 +51,21 @@ let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
+let pacman = new Pacman(oneBlockSize, oneBlockSize, oneBlockSize, oneBlockSize, oneBlockSize / 5);
 
-function gameLoop() {
+let gameLoop = () => {
     update()
     draw()
 }
 
-function update() {
-    //todo
+let update = () => {
+    pacman.moveProcess()
 }
 
-function draw() {
-    createRect(0, 0, canvas.width, canvas.height) // Create a game background
+let draw = () => {
+    createRect(0, 0, canvas.width, canvas.height, "black") // Create a game background
     drawWalls()
+    pacman.draw()
 }
 
 let gameInterval = setInterval(gameLoop(), 1000 / fps)
@@ -113,3 +121,13 @@ function drawWalls() {
         }
     }
 }
+
+
+// let createNewPacman = () => {
+
+// }
+
+
+// createNewPacman()
+gameLoop()
+
